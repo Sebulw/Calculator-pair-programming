@@ -1,6 +1,8 @@
 package com.sda.calculator.tests;
 
 import com.sda.calculator.Calculator;
+import com.sda.calculator.exception.MethodDoesNotHaveArgumentException;
+import com.sda.calculator.exception.NegativesNotAllowed;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,24 +17,20 @@ public class CalculatorTest {
     }
 
     @Test
-    public void addingTest() {
+    public void addingTest() throws MethodDoesNotHaveArgumentException, NegativesNotAllowed {
         Assert.assertEquals(5 ,calculator.add("2,3"));
-        Assert.assertEquals(12 ,calculator.add("5,7"));
-        Assert.assertEquals(0 ,calculator.add(""));
+    }
+    @Test
+    public void moreThanOneArgumentAddingTest() throws MethodDoesNotHaveArgumentException, NegativesNotAllowed {
         Assert.assertEquals(5, calculator.add("1,1,1,1,1"));
+    }
+    @Test
+    public void addingTest4() throws MethodDoesNotHaveArgumentException, NegativesNotAllowed {
         Assert.assertEquals(9, calculator.add("0,2,3,4"));
     }
     @Test
-    public void subtractTest() {
-        Assert.assertEquals(0, calculator.subtract(""));
-        Assert.assertEquals(52, calculator.subtract("100,48"));
-        Assert.assertEquals(5, calculator.subtract("10,5"));
+    public void valuesHigherThanTousandAreIgnoredTest() throws MethodDoesNotHaveArgumentException, NegativesNotAllowed {
+        Assert.assertEquals(1, calculator.add("1000,1000,1000,1"));
     }
-    @Test
-    public void multiplyTest() {
-        Assert.assertEquals(0, calculator.multiply(""));
-        Assert.assertEquals(45, calculator.multiply("15,3"));
-        Assert.assertEquals(330, calculator.multiply("33,10"));
 
-    }
 }
